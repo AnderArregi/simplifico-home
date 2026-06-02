@@ -6,8 +6,9 @@ import { Float, MeshTransmissionMaterial } from "@react-three/drei";
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import Lenis from "@studio-freight/lenis";
-import * as THREE from "three";
+import ThreeScene from "./canvas";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const chaosItems = [
     "Facturas",
     "Impuestos",
@@ -20,6 +21,11 @@ const chaosItems = [
 ];
 
 const services = ["Fiscalidad", "Laboral", "Finanzas", "Tecnología"];
+
+function seededRandom(index, salt) {
+    const x = Math.sin(index * 12.9898 + salt * 78.233) * 43758.5453;
+    return x - Math.floor(x);
+}
 
 function Particle({ radius, angle, y, speed, scale }) {
     const ref = useRef(null);
@@ -47,11 +53,11 @@ function OrbitalCore() {
     const particles = useMemo(() => {
         return Array.from({ length: 44 }, (_, i) => ({
             id: i,
-            radius: 1.5 + Math.random() * 2.4,
-            angle: Math.random() * Math.PI * 2,
-            y: (Math.random() - 0.5) * 2.2,
-            speed: 0.15 + Math.random() * 0.28,
-            scale: 0.035 + Math.random() * 0.08,
+            radius: 1.5 + seededRandom(i, 1) * 2.4,
+            angle: seededRandom(i, 2) * Math.PI * 2,
+            y: (seededRandom(i, 3) - 0.5) * 2.2,
+            speed: 0.15 + seededRandom(i, 4) * 0.28,
+            scale: 0.035 + seededRandom(i, 5) * 0.08,
         }));
     }, []);
 
@@ -174,6 +180,10 @@ export default function Home() {
                 </nav>
             </header>
 
+            <section className="relative min-h-screen overflow-hidden bg-black">
+                <ThreeScene />
+            </section>
+
             <section className="relative min-h-screen overflow-hidden">
                 <div className="absolute inset-0 opacity-70">
                     <HeroScene />
@@ -212,6 +222,8 @@ export default function Home() {
                     </div>
                 </div>
             </section>
+
+            
 
             <section className="relative bg-[#050706] px-6 py-28 overflow-hidden">
                 <div className="mx-auto grid max-w-7xl gap-16 lg:grid-cols-[0.75fr_1.25fr] lg:items-center">
