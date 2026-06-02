@@ -8,9 +8,6 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
 export default function ThreeScene() {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  
-
- 
 
   useEffect(() => {
     const loader = new GLTFLoader();
@@ -68,12 +65,12 @@ export default function ThreeScene() {
 
         const box = new THREE.Box3().setFromObject(model);
         const center = box.getCenter(new THREE.Vector3());
-        const manualScale = 2;
+        const manualScale = 1.5;
 
         model.scale.setScalar(manualScale);
         model.position.set(
           -center.x * manualScale,
-          -center.y * manualScale ,
+          -center.y * manualScale,
           -center.z * manualScale
         );
 
@@ -94,7 +91,7 @@ export default function ThreeScene() {
       0.1,
       100
     );
-    
+
     camera.position.z = 6;
 
     const renderer = new THREE.WebGLRenderer({
@@ -106,7 +103,6 @@ export default function ThreeScene() {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     container.appendChild(renderer.domElement);
 
-
     const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
     scene.add(ambientLight);
 
@@ -114,14 +110,17 @@ export default function ThreeScene() {
     light.position.set(2, 2, 5);
     scene.add(light);
 
+    scene.background = new THREE.Color(0x02021F);
+
     const title = new Text();
 
-    title.text = "Tu negocio de autónomo";
+    title.text = "Tu negocio de autónomo,\nsimplificado.";
+    title.textAlign = "center";
     title.fontSize = 0.35;
     title.color = 0xffffff;
     title.anchorX = "center";
     title.anchorY = "middle";
-    title.position.set(0, 1.8, 0);
+    title.position.set(0, 0.2, 2.5);
 
     scene.add(title);
     title.sync();
@@ -138,6 +137,7 @@ export default function ThreeScene() {
       if (loadedModel) {
         loadedModel.rotation.y += 0.005;
       }
+
       renderer.render(scene, camera);
       animationFrameId = requestAnimationFrame(animate);
     };
