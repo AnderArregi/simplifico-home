@@ -154,7 +154,7 @@ export default function Home() {
             <header className="fixed left-0 top-0 z-50 w-full px-5 py-4">
                 <nav className="mx-auto flex max-w-7xl items-center justify-between rounded-full border border-white/10 bg-black/30 px-5 py-3 backdrop-blur-xl">
                     <img
-                        src="/logo.jpeg"
+                        src="/simplifico-logo.webp"
                         alt="Simplifico"
                         className="h-10 w-auto object-contain"
                     />
