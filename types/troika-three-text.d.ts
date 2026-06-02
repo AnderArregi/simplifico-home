@@ -7,6 +7,7 @@ declare module "troika-three-text" {
     color: ColorRepresentation;
     anchorX: string;
     anchorY: string;
+    textAlign: string;
     sync(callback?: () => void): void;
     dispose(): void;
   }
