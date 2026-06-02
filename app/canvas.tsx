@@ -160,8 +160,6 @@ export default function ThreeScene() {
       title.dispose();
       modelTexture.dispose();
       modelMaterials.forEach((material) => material.dispose());
-      torus.geometry.dispose();
-      torus.material.dispose();
       renderer.dispose();
 
       container.removeChild(renderer.domElement);
